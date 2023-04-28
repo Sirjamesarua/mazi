@@ -37,14 +37,27 @@
           <div class="col-md-7">
             <div class="card-body" style="opacity: 1">
               <div class="brand-wrapper">
-                <img src="logo.svg" alt="logo" class="logo">
+                <h1>Ebube International Store</h1>
               </div>
-              <p class="login-card-description">Hello 👋🏾! Welcome to Mazi International Store</p>
+
+              @if ($errors->any())
+                <div class="container">
+                    @foreach ($errors->all() as $error)
+                        <p style="color: red">{{ $error }}.</p>
+                    @endforeach
+                </div>
+            @endif
+            
+            @if (session('message'))
+                <p style="color: green">{{session('message')}}</p>
+            @endif
+
+              <p class="login-card-description">Hello 👋🏾! Welcome to Ebube International Store</p>
               
 
                <div id='btn'>
                   <p><b>
-                    <h5>I'm Zigi, your Mazi online assistant 👩🏾‍💻. <br>What can I help you with today?
+                    <h5>I'm Zigi, your Ebube online assistant 👩🏾‍💻. <br>What can I help you with today?
                     I’m here and happy to assist​ 😀.</h5>
                   </b></p>
 
@@ -56,23 +69,23 @@
                     @csrf                    <!-- Name input -->
                     <div class="form-outline">
                         <label class="form-label" for="name2">Name</label>
-                        <input type="text" id="name2" class="form-control" />
+                        <input type="text" id="name2" class="form-control" name="name" required />
                     </div>
 
                     <!-- Email input -->
                     <div class="form-outline">
                         <label class="form-label" for="email2">Email address</label>
-                        <input type="email" id="email2" class="form-control" />
+                        <input type="email" id="email2" class="form-control" name="email" required />
                     </div>
 
                     <!-- password input -->
                     <div class="form-outline">
                         <label class="form-label" for="password2">Message</label>
-                        <input type="textarea" id="password2" class="form-control" />
+                        <input type="textarea" id="password2" class="form-control" name="message" required />
                     </div>
 
                     <!-- Submit button -->
-                    <button type="submit" class="btn btn-primary btn-block" onclick="submitForm()">Send Message</button>
+                    <button type="submit" class="btn btn-primary btn-block">Send Message</button>
                 </form>
 
                <br />
@@ -81,7 +94,7 @@
                   <a href="#!">Privacy policy</a>
                 </nav>
                 <div>
-                    <i class="bi bi-messenger text-primary" style="font-size: 100%"></i>
+                    {{-- <i class="bi bi-messenger text-primary" style="font-size: 100%"></i> --}}
                     <a href="https://wa.me/2348140480701?text=Hello"><i class="bi bi-whatsapp text-success mx-2" style="font-size: 100%"></i></a>
                     <a href="tel:08140480701"><i class="bi bi-telephone text-success" style="font-size: 100%"></i></a>
                 </div>
@@ -106,10 +119,6 @@
         document.getElementById('btn').style.display='none'
     }
 
-    function submitForm(){
-        document.getElementById('form').style.display='none'
-        document.getElementById('btn').style.display='block'
-    }
 
   </script>
 

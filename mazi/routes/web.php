@@ -21,5 +21,15 @@ Route::get('/', function () {
 });
 
 Route::post('/', function (Request $request) {
- Notification::route('mail', 'okonkwoarua@gmail.com')->notify(new sendEmail());
+    try {
+        $data = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'message' => 'required|string'
+        ]);
+        Notification::route('mail', $data['email'])->notify(new sendEmail($data['name']));
+        return back()->with('message','Thanks for contacting us. PLease check your mailbox');
+    } catch (\Throwable $th) {
+        return back()->withErrors('Something went wrong');
+    }
 })->name('sendEmail');

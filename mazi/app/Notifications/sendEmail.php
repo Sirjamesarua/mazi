@@ -11,12 +11,13 @@ class sendEmail extends Notification
 {
     use Queueable;
 
+    protected $name;
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($name)
     {
-        //
+        $this->name = $name;
     }
 
     /**
@@ -35,9 +36,10 @@ class sendEmail extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('mazi international')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line("Hello {$this->name}")
+                    ->line("Thank you for contacting Ebube website")
+                    ->line('we will get back to you as soon as possible')
+                    ->line('Your best store,');
     }
 
     /**
